@@ -50,17 +50,28 @@ for i in range(0, row-1):
 time = df.iloc[row-1][col-2]
 average_speed = df.iloc[:,27].mean()
 max_speed = df.iloc[:,27].max()
+average_light = df.iloc[:,12].mean()
 print ('\nTotal time: ' + str((time/(1000*60)%60)) + ' minutes')
 print ('Average speed: ' + str(average_speed) + ' km/h or ' +  str(average_speed * .621371) + ' mph')
 print ('Max speed: ' + str(max_speed) + ' km/h or ' + str(max_speed * .621371) + ' mph')
 print ('Number of stops: ' + str(number_of_stops))
-print ('Distance travelled: ' + str(distance) + ' km or ' + str(distance * .621371) + ' miles\n')
+print ('Distance travelled: ' + str(distance) + ' km or ' + str(distance * .621371) + ' miles')
+print ('Average Light: ' + str(average_light) + " lux\n")
 
-# fix y label
+# distances
 plt.plot(distances)
 plt.ylabel('Cumulative Distance (miles)')
 plt.xlabel('Number of distances calculated from long. and lat.')
 out_png = 'distances.png'
+plt.savefig(out_png, dpi=150)
+plt.clf()
+
+# light average
+plt.plot(df.iloc[:,12])
+plt.axhline(average_light, color='r', linestyle='dashed', linewidth=2)
+plt.ylabel('Lux')
+plt.xlabel('Number of entries')
+out_png = 'light.png'
 plt.savefig(out_png, dpi=150)
 plt.clf()
 
@@ -69,7 +80,7 @@ plt.plot(df.iloc[:,27])
 plt.axhline(average_speed, color='r', linestyle='dashed', linewidth=2)
 plt.axhline(max_speed, color='g', linestyle='dashed', linewidth=2)
 plt.ylabel('km/h')
-plt.xlabel('number of entries')
+plt.xlabel('Number of entries')
 plt.legend(['speeds', 'average speed', 'max speed'], loc='upper left')
 out_png = 'speed.png'
 plt.savefig(out_png, dpi=150)
