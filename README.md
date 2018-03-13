@@ -1,6 +1,6 @@
 # Sensor Data Project
 
-To run the program, enter "python3 sensor.py" into the CLI.
+To run the program, enter "python3 sensor.py" into the CLI. Ubuntu on Windows was used for this project.
 
 This project extracts information that was taken from AndroSensor.
 
